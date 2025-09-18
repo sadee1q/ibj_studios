@@ -3,19 +3,21 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once __DIR__ . '/../adminpanel/includes/config.php';
+// ✅ Correct config path
+require_once __DIR__ . '/includes/config.php';
 
-// PHPMailer
+// ✅ PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require_once __DIR__ . '/../adminpanel/includes/PHPMailer/src/Exception.php';
-require_once __DIR__ . '/../adminpanel/includes/PHPMailer/src/PHPMailer.php';
-require_once __DIR__ . '/../adminpanel/includes/PHPMailer/src/SMTP.php';
+// ✅ Correct PHPMailer paths
+require_once __DIR__ . '/adminpanel/phpmailer/src/Exception.php';
+require_once __DIR__ . '/adminpanel/phpmailer/src/PHPMailer.php';
+require_once __DIR__ . '/adminpanel/phpmailer/src/SMTP.php';
 
 // Only handle POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: booking.html');
+    header('Location: users/booking.html'); // Adjusted to match folder
     exit;
 }
 
@@ -27,12 +29,12 @@ $booking_time   = trim($_POST['booking_time'] ?? '');
 $notes          = trim($_POST['notes'] ?? '');
 
 if ($customer_name === '' || $customer_email === '' || $booking_date === '' || $booking_time === '') {
-    header('Location: booking.html?error=Please+fill+all+required+fields');
+    header('Location: users/booking.html?error=Please+fill+all+required+fields');
     exit;
 }
 
 if (!filter_var($customer_email, FILTER_VALIDATE_EMAIL)) {
-    header('Location: booking.html?error=Invalid+email+address');
+    header('Location: users/booking.html?error=Invalid+email+address');
     exit;
 }
 
@@ -57,9 +59,9 @@ try {
     $mail->Host       = 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
     $mail->Username   = 'ajibrilla294@gmail.com';  // your Gmail
-    $mail->Password   = 'dkosguovcajsuoyg';    // Gmail App Password
-    $mail->SMTPSecure = 'ssl'; // or 'tls'
-    $mail->Port       = 465;   // if ssl use 465, if tls use 587
+    $mail->Password   = 'dkosguovcajsuoyg';        // Gmail App Password
+    $mail->SMTPSecure = 'ssl'; 
+    $mail->Port       = 465;
 
     // ✅ Always set your Gmail as sender
     $mail->setFrom('ajibrilla294@gmail.com', 'Photography Website');

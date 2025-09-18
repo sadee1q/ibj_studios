@@ -3,15 +3,16 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once __DIR__ . '/../adminpanel/includes/config.php';
+require_once __DIR__ . '/includes/config.php';
 
 // PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require_once __DIR__ . '/../adminpanel/includes/PHPMailer/src/Exception.php';
-require_once __DIR__ . '/../adminpanel/includes/PHPMailer/src/PHPMailer.php';
-require_once __DIR__ . '/../adminpanel/includes/PHPMailer/src/SMTP.php';
+require_once __DIR__ . '/adminpanel/phpmailer/src/Exception.php';
+require_once __DIR__ . '/adminpanel/phpmailer/src/PHPMailer.php';
+require_once __DIR__ . '/adminpanel/phpmailer/src/SMTP.php';
+
 
 // Only handle POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
